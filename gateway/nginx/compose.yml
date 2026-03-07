@@ -1,0 +1,16 @@
+networks:
+  infra:
+    external: true
+
+services:
+  nginx:
+    image: nginx:alpine
+    restart: always
+    volumes:
+      - "./.lego/certificates:/certs:ro"
+      - "./conf.d:/etc/nginx/conf.d:ro"
+    ports:
+      - "443:443"
+      - "443:443/udp"
+    networks:
+      - infra

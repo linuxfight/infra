@@ -1,0 +1,16 @@
+# secrets
+terraform.*
+.terraform
+
+# secrets
+.env
+cloud_password
+backups
+xray.json
+lab.agekey
+server/wg/*
+secrets.nix
+
+# binary files
+.DS_Store
+gateway/nginx/bin/*
