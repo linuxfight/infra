@@ -6,9 +6,12 @@ services:
   nginx:
     image: nginx:alpine
     restart: always
+    cap_add:
+      - NET_ADMIN
     volumes:
       - "./.lego/certificates:/certs:ro"
       - "./conf.d:/etc/nginx/conf.d:ro"
+      - "./add_wg_route.sh:/docker-entrypoint.d/99-add_wg_route.sh:ro"
     ports:
       - "443:443"
       - "443:443/udp"
