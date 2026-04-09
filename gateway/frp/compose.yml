@@ -1,0 +1,12 @@
+services:
+  frps:
+    image: ghcr.io/fatedier/frps:v0.68.0
+    container_name: frps
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+      - "7000:7000"
+    volumes:
+      - ./frps.toml:/etc/frp/frps.toml:ro
+    command: -c /etc/frp/frps.toml

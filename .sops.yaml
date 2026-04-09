@@ -1,0 +1,3 @@
+creation_rules:
+  - path_regex: \.(env|nix|conf|toml)$
+    age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3

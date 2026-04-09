@@ -1,6 +1,4 @@
 {
-  config,
-  lib,
   pkgs,
   ...
 }:
@@ -41,15 +39,15 @@
   virtualisation.docker.enable = true;
 
   environment.systemPackages = with pkgs; [
-    pkgs.curl
-    pkgs.gitMinimal
-    pkgs.nginx
-    pkgs.zsh
-    pkgs.vim
-    pkgs.ncurses
-    pkgs.neofetch
-    pkgs.tree
-    pkgs.btop
+    curl
+    gitMinimal
+    nginx
+    zsh
+    vim
+    ncurses
+    neofetch
+    tree
+    btop
   ];
 
   services.openssh.enable = true;

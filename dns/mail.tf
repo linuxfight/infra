@@ -27,7 +27,7 @@ resource "cloudflare_dns_record" "maileroo_spf" {
 resource "cloudflare_dns_record" "maileroo_dkim" {
   zone_id = var.zone_id
   name    = "mta._domainkey"
-  content = "\"v=DKIM1;h=sha256;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnsw044nrOo/UxD6xElx6drcCcU93E44BS8CSGp3bw82qeyO8jHYI5CMVHLxsPYT6WRZGsHV2Qk++r7yr/klM0PmLahz6sHRNksJgntWZiwL8y5ivfcEjZxrofWpb4gfg9NPxIRLtSiaYZ4i+vW9QM2w7YGnXhAF0S7HuEs+1iVKHFmNFP8Ujl9d0G4HbvnvUiMzHn6Q6ZsQAFlgdtgC8T2V7phFPAaG8Y66QvgP8gdpQcy3abnTENLu7U8j2MdYse5YloODwjF9y0p4T1pNC0+xmY6nxrDeX2CVKI8MXGaHCZjP0CmHFW+rtq1XI+Pg8mK72L1x7re13g+6XjqUgfwIDAQAB\""
+  content = "\"v=DKIM1;h=sha256;p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuzj4iUspSzMgMfdGuyscTP8v/RorIxj5WrraZ1Q3G5bSiLevmmTd5MFlSIikj627+2Qul5ODWlxWBchR394JgTF/Mvj8TSj9TG+Cs9uDx50sWpfg6KgJ+V0mnBTpMYMJ23+HdZMVRl5lhD4B9QCMj0yHoD4LMdZTdq4sSK1RzJ91QBr/Oe8QTClks7v/1YErmL09dx5BeCWsOc8Fitsh5VWaViLCNARU/CdRLIVdn0L0sr+JKtIeK9tOEc9I6X4h6KmsDsGjJSggZwQ+DwQSydg8PJUgAKI86d1UmeMTym5FR0yGCKwULFBwXQlx7U8u5OQCjUnE9rIcDYAXaxRXnQIDAQAB\""
   type    = "TXT"
   ttl = 3600
 }

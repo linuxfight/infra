@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   ghosttyTerminfoSrc = pkgs.writeText "xterm-ghostty.terminfo" ''
@@ -85,16 +85,19 @@ let
             xr=\EP>\\|[ -~]+a\E\\,
   '';
 
-  ghosttyTerminfo = pkgs.runCommand "ghostty-terminfo" {
-    buildInputs = [ pkgs.ncurses ];
-  } ''
-    mkdir -p $out/share/terminfo
-    ${pkgs.ncurses}/bin/tic -x -o $out/share/terminfo ${ghosttyTerminfoSrc}
-  '';
+  ghosttyTerminfo =
+    pkgs.runCommand "ghostty-terminfo"
+      {
+        buildInputs = [ pkgs.ncurses ];
+      }
+      ''
+        mkdir -p $out/share/terminfo
+        ${pkgs.ncurses}/bin/tic -x -o $out/share/terminfo ${ghosttyTerminfoSrc}
+      '';
 
 in
 {
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = [
     ghosttyTerminfo
   ];
 

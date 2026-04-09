@@ -1,18 +1,30 @@
 volumes:
-  wv-db:
-  wv-data:
+  vw-db:
+  vw-data:
+
+networks:
+  infra:
+    external: true
 
 services:
   vaultwarden:
     image: vaultwarden/server:alpine
     container_name: vaultwarden
     restart: always
+    networks:
+      - infra
     env_file:
       - .env
     volumes:
-      - wv-data:/data
-    ports:
-      - "10080:80"
+      - vw-data:/data
+    labels:
+      - traefik.enable=true
+
+      # https
+      - traefik.http.routers.vaultwarden.entrypoints=websecure
+      - traefik.http.routers.vaultwarden.rule=Host(`vault.lxft.dev`)
+      - traefik.http.routers.vaultwarden.tls.certresolver=le
+      - "traefik.http.services.vaultwarden.loadbalancer.server.port=80"
     depends_on:
       - db
 
@@ -20,12 +32,12 @@ services:
     image: postgres:18-alpine
     container_name: vaultwarden-db
     restart: always
+    networks:
+      - infra
     env_file:
       - .env
     volumes:
-      - wv-db:/var/lib/postgresql
-    ports:
-      - "15432:5432"
+      - vw-db:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 30s

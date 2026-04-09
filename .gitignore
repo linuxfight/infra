@@ -1,16 +1,18 @@
-# secrets
-terraform.*
+# terraform
+*.tfstate
+*.tfstate.backup
 .terraform
+terraform.tfvars
 
 # secrets
-.env
-cloud_password
+*.env
+secret.toml
 backups
-xray.json
 lab.agekey
 server/wg/*
 secrets.nix
+google-pki-data
+!*.enc
 
 # binary files
 .DS_Store
-gateway/nginx/bin/*
