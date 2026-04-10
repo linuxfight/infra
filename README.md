@@ -1,4 +1,6 @@
 # My infra
 
 ## TODO:
-- add CD
+- add terraform CD
+- add gateway CD
+- add homelab CD
