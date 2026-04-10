@@ -11,7 +11,7 @@ services:
       - TZ=Etc/UTC
       - SERVERURL=cloud.lxft.tech
       - SERVERPORT=51820
-      - PEERS=2
+      - PEERS=4
       - PEERDNS=1.1.1.1
       - INTERNAL_SUBNET=10.8.0.0
       - ALLOWEDIPS=10.8.0.0/24
@@ -21,6 +21,9 @@ services:
       - ./config:/config
       - /lib/modules:/lib/modules
     ports:
+      - 80:80
+      - 443:443
+      - 25565:25565
       - 51820:51820/udp
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1

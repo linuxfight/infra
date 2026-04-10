@@ -51,12 +51,12 @@
   ];
 
   services.openssh.enable = true;
-  # services.k3s = {
-  #   enable = true;
-  #   role = "server";
-  #   clusterInit = true;
-  #   extraFlags = "--tls-san 10.8.0.3";
-  # };
+  services.k3s = {
+    enable = true;
+    role = "server";
+    clusterInit = true;
+    extraFlags = "--tls-san 10.8.0.3";
+  };
 
   system.stateVersion = "25.11";
 }

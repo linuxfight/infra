@@ -6,13 +6,16 @@ terraform.tfvars
 
 # secrets
 *.env
-secret.toml
-backups
-lab.agekey
-server/wg/*
+*.conf
+privatekey-*
+publickey-*
+presharedkey-*
+secrets.toml
 secrets.nix
+lab.agekey
 google-pki-data
 !*.enc
 
 # binary files
+backups
 .DS_Store
