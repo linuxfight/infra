@@ -55,7 +55,7 @@
     enable = true;
     role = "server";
     clusterInit = true;
-    extraFlags = "--tls-san 10.8.0.3";
+    extraFlags = "--tls-san 10.8.0.2";
   };
 
   system.stateVersion = "25.11";
