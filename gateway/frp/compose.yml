@@ -8,5 +8,5 @@ services:
       - "443:443"
       - "7000:7000"
     volumes:
-      - ./frps.toml:/etc/frp/frps.toml:ro
+      - ./secret.toml:/etc/frp/frps.toml:ro
     command: -c /etc/frp/frps.toml

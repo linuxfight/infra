@@ -11,7 +11,7 @@ services:
     container_name: frpc
     restart: always
     volumes:
-      - ./frpc.toml:/etc/frp/frpc.toml:ro
+      - ./secret.toml:/etc/frp/frpc.toml:ro
     network_mode: host
     command: -c /etc/frp/frpc.toml
 
