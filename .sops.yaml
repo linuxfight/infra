@@ -1,3 +1,3 @@
 creation_rules:
-  - path_regex: (\.(env|nix|conf|toml)$|(publickey|privatekey|presharedkey)-.*)
+  - path_regex: (\.(env|nix|conf|toml|tfstate|tfvars)$|tfstate\.backup$|(publickey|privatekey|presharedkey)-.*)
     age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3

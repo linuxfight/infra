@@ -1,17 +1,20 @@
 # terraform
 *.tfstate
 *.tfstate.backup
-.terraform
-terraform.tfvars
 
-# secrets
-*.env
+# wireguard
 *.conf
 privatekey-*
 publickey-*
 presharedkey-*
+
+# configs
+terraform.tfvars
+*.env
 secrets.toml
 secrets.nix
+
+# encryption
 lab.agekey
 google-pki-data
 !*.enc
@@ -19,3 +22,4 @@ google-pki-data
 # binary files
 backups
 .DS_Store
+.terraform
