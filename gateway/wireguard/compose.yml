@@ -9,7 +9,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Etc/UTC
-      - SERVERURL=cloud.lxft.tech
+      - SERVERURL=cloud.lxft.dev
       - SERVERPORT=51820
       - PEERS=4
       - PEERDNS=1.1.1.1
