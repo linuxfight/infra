@@ -15,7 +15,7 @@ secrets.toml
 secrets.nix
 
 # encryption
-lab.agekey
+infra.agekey
 google-pki-data
 !*.enc
 
