@@ -39,7 +39,6 @@ services:
       - infra
     env_file:
       - db.env
-      - smtp.env
     volumes:
       - fj-db:/var/lib/postgresql
     healthcheck:

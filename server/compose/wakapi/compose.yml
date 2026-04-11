@@ -14,7 +14,9 @@ services:
     networks:
       - infra
     env_file:
-      - .env
+      - app.env
+      - db.env
+      - smtp.env
     volumes:
       - wakapi-data:/data
     labels:
@@ -35,7 +37,7 @@ services:
     networks:
       - infra
     env_file:
-      - .env
+      - db.env
     volumes:
       - wakapi-db:/var/lib/postgresql
     healthcheck:
