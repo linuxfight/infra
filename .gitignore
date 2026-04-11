@@ -22,4 +22,5 @@ google-pki-data
 # binary files
 backups
 .DS_Store
+.idea
 .terraform

@@ -1,0 +1,45 @@
+volumes:
+  traefik-le-data:
+
+networks:
+  infra:
+    external: true
+
+services:
+  traefik:
+    image: traefik:v3.6.12
+    container_name: traefik
+    restart: always
+    networks:
+      - infra
+    security_opt:
+      - no-new-privileges:true
+    command:
+      # debug
+      - "--accesslog=true"
+      - "--log.level=INFO"
+
+      # docker config
+      - "--providers.docker=true"
+      - "--providers.docker.network=infra"
+      - "--providers.docker.exposedbydefault=false"
+
+      # http
+      - "--entryPoints.web.address=:80"
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+      - "--entrypoints.web.http.redirections.entrypoint.permanent=true"
+
+      # https
+      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.websecure.http.tls.certresolver=le"
+      - "--certificatesresolvers.le.acme.email=hello@lxft.dev"
+      - "--certificatesresolvers.le.acme.storage=/le/acme.json" # Path inside container volume
+      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - traefik-le-data:/le
+      - /var/run/docker.sock:/var/run/docker.sock:ro
