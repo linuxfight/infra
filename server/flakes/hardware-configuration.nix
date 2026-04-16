@@ -10,6 +10,13 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  boot.loader.grub.enable = true;
+  boot.loader.grub = {
+    efiSupport = true;
+    efiInstallAsRemovable = true;
+    device = "nodev";
+  };
+
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "ahci"

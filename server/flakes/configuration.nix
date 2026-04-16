@@ -18,16 +18,12 @@
   imports = [
     ./hardware-configuration.nix
     ./shell.nix
+    ./packages.nix
     ./secrets.nix
   ];
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub = {
-    efiSupport = true;
-    efiInstallAsRemovable = true;
-    device = "nodev";
-  };
-
+  virtualisation.docker.enable = true;
+  services.openssh.enable = true;
   networking.hostName = "blackbox";
   networking.networkmanager.enable = true;
   networking.wg-quick.interfaces.wg0 = {
@@ -35,22 +31,6 @@
     autostart = true;
   };
   networking.firewall.trustedInterfaces = [ "wg0" ];
-
-  virtualisation.docker.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    curl
-    gitMinimal
-    nginx
-    zsh
-    vim
-    ncurses
-    neofetch
-    tree
-    btop
-  ];
-
-  services.openssh.enable = true;
 
   system.stateVersion = "25.11";
 }
