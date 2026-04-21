@@ -1,0 +1,47 @@
+volumes:
+  tgfeed-valkey:
+
+networks:
+  infra:
+    external: true
+
+services:
+  tgfeed:
+    container_name: tgfeed
+    image: ghcr.io/ndmitry/tgfeed:latest
+    networks:
+      - infra
+    environment:
+      - TZ=Europe/Moscow
+      - HTTP_SERVER_PORT=8080
+      - REDIS_HOST=tgfeed-valkey
+      - HTTPS_PROXY=socks5://xray:10808
+      - REVERSE_PROXY=true
+    labels:
+      - "traefik.enable=true"
+
+      # https
+      - "traefik.http.routers.feed.entrypoints=websecure"
+      - "traefik.http.routers.feed.rule=Host(`feed.lxft.dev`)"
+      - "traefik.http.routers.feed.tls.certresolver=le"
+      - "traefik.http.services.feed.loadbalancer.server.port=8080"
+    depends_on:
+      - valkey
+    restart: unless-stopped
+
+  valkey:
+    container_name: tgfeed-valkey
+    image: valkey/valkey:alpine
+    networks:
+      - infra
+    environment:
+      - TZ=Europe/Moscow
+    volumes:
+      - tgfeed-valkey:/data
+    healthcheck:
+      test: ["CMD", "valkey-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped

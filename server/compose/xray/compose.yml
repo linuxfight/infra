@@ -1,0 +1,16 @@
+networks:
+  infra:
+    external: true
+
+services:
+  xray:
+    image: ghcr.io/xtls/xray-core:latest
+    restart: always
+    container_name: xray
+    command: run -c /etc/xray/config.json
+    volumes:
+      - "./config.json:/etc/xray/config.json:ro"
+    networks:
+      - infra
+    ports:
+      - "10808:10808"
