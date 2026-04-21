@@ -11,6 +11,7 @@ presharedkey-*
 # configs
 terraform.tfvars
 *.env
+config.json
 secrets.toml
 secrets.nix
 

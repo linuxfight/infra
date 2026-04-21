@@ -9,6 +9,7 @@ find . \( \
   -name "publickey-*" -o \
   -name "privatekey-*" -o \
   -name "presharedkey-*" -o \
+  -name "config.json" -o \
   -name "*.tfvars" -o \
   -name "*.tfstate" -o \
   -name "*.tfstate.backup" \

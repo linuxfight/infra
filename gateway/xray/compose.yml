@@ -1,0 +1,9 @@
+services:
+  xray:
+    image: ghcr.io/xtls/xray-core:latest
+    restart: always
+    command: run -c /etc/xray/config.json
+    volumes:
+      - "./config.json:/etc/xray/config.json:ro"
+    ports:
+      - "8443:8443"

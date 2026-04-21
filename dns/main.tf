@@ -37,9 +37,9 @@ resource "cloudflare_dns_record" "lab" {
   proxied = false
 }
 
-resource "cloudflare_dns_record" "auth" {
+resource "cloudflare_dns_record" "dash" {
   zone_id = var.zone_id
-  name    = "auth"
+  name    = "dash"
   content = "85.208.85.194"
   type    = "A"
   ttl = 3600
