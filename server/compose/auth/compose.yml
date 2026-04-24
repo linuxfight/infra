@@ -1,0 +1,73 @@
+secrets:
+  STORAGE_PASSWORD:
+    file: ./secrets/STORAGE_PASSWORD_SECRET
+
+volumes:
+  authelia-db-data:
+
+networks:
+  infra:
+    external: true
+  authelia-internal:
+    driver: bridge
+    internal: true
+
+services:
+  authelia:
+    container_name: authelia
+    image: authelia/authelia:latest
+    restart: unless-stopped
+    user: "1000:100"
+    depends_on:
+      authelia-db:
+        condition: service_healthy
+    networks:
+      - infra
+      - authelia-internal
+    expose:
+      - 9091
+    environment:
+      TZ: "Europe/Moscow"
+      AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE: "/secrets/JWT_SECRET"
+      AUTHELIA_SESSION_SECRET_FILE: "/secrets/SESSION_SECRET"
+      AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE: "/secrets/STORAGE_ENCRYPTION_KEY_SECRET"
+      AUTHELIA_STORAGE_POSTGRES_PASSWORD_FILE: "/secrets/STORAGE_PASSWORD_SECRET"
+      AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE: "/secrets/SMTP_PASSWORD_SECRET"
+    volumes:
+      - ./config:/config:ro
+      - ./secrets:/secrets:ro
+    labels:
+      traefik.enable: "true"
+
+      traefik.http.routers.authelia.rule: "Host(`auth.lxft.dev`)"
+      traefik.http.routers.authelia.entryPoints: "websecure"
+      traefik.http.routers.authelia.tls: "true"
+      traefik.http.routers.authelia.tls.certresolver: "le"
+      traefik.http.services.authelia.loadbalancer.server.port: "9091"
+
+      traefik.http.middlewares.authelia.forwardAuth.address: "http://authelia:9091/api/authz/forward-auth"
+      traefik.http.middlewares.authelia.forwardAuth.trustForwardHeader: "true"
+      traefik.http.middlewares.authelia.forwardAuth.maxResponseBodySize: "8192"
+      traefik.http.middlewares.authelia.forwardAuth.authResponseHeaders: "Remote-User,Remote-Groups,Remote-Email,Remote-Name"
+
+  authelia-db:
+    container_name: authelia-db
+    image: postgres:18-alpine
+    restart: unless-stopped
+    networks:
+      - authelia-internal
+    expose:
+      - 5432
+    environment:
+      TZ: "Europe/Moscow"
+      POSTGRES_DB: "authelia"
+      POSTGRES_USER: "postgres"
+    env_file:
+      - db.env
+    volumes:
+      - authelia-db-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d authelia"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

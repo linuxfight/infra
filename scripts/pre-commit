@@ -11,8 +11,11 @@ find . \( \
   -name "presharedkey-*" -o \
   -name "config.json" -o \
   -name "*.tfvars" -o \
+  -name "*_SECRET" -o \
   -name "*.tfstate" -o \
-  -name "*.tfstate.backup" \
+  -name "*.tfstate.backup" -o \
+  -name "configuration.yml" -o \
+  -name "users_database.yml" \
 \) | grep -v backups | grep -v '\.enc$' | while read -r file; do
   enc_file="${file}.enc"
   echo "Encrypting $file → $enc_file"

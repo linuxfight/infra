@@ -18,13 +18,11 @@ services:
       - HTTPS_PROXY=socks5://xray:10808
       - REVERSE_PROXY=true
     labels:
-      - "traefik.enable=true"
-
-      # https
-      - "traefik.http.routers.feed.entrypoints=websecure"
-      - "traefik.http.routers.feed.rule=Host(`feed.lxft.dev`)"
-      - "traefik.http.routers.feed.tls.certresolver=le"
-      - "traefik.http.services.feed.loadbalancer.server.port=8080"
+      traefik.enable: "true"
+      traefik.http.routers.feed.entrypoints: "websecure"
+      traefik.http.routers.feed.rule: "Host(`feed.lxft.dev`)"
+      traefik.http.routers.feed.tls.certresolver: "le"
+      traefik.http.services.feed.loadbalancer.server.port: "8080"
     depends_on:
       - valkey
     restart: unless-stopped

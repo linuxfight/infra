@@ -20,13 +20,11 @@ services:
     volumes:
       - wakapi-data:/data
     labels:
-      - "traefik.enable=true"
-
-      # https
-      - "traefik.http.routers.wakapi.entrypoints=websecure"
-      - "traefik.http.routers.wakapi.rule=Host(`waka.lxft.dev`)"
-      - "traefik.http.routers.wakapi.tls.certresolver=le"
-      - "traefik.http.services.wakapi.loadbalancer.server.port=3000"
+      traefik.enable: "true"
+      traefik.http.routers.wakapi.entrypoints: "websecure"
+      traefik.http.routers.wakapi.rule: "Host(`waka.lxft.dev`)"
+      traefik.http.routers.wakapi.tls.certresolver: "le"
+      traefik.http.services.wakapi.loadbalancer.server.port: "3000"
     depends_on:
       - db
 

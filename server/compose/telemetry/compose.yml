@@ -98,13 +98,11 @@ services:
     # ports:
     #   - "3000:3000"
     labels:
-      - "traefik.enable=true"
-
-      # https
-      - "traefik.http.routers.grafana.entrypoints=websecure"
-      - "traefik.http.routers.grafana.rule=Host(`dash.lxft.dev`)"
-      - "traefik.http.routers.grafana.tls.certresolver=le"
-      - "traefik.http.services.grafana.loadbalancer.server.port=3000"
+      traefik.enable: "true"
+      traefik.http.routers.grafana.entrypoints: "websecure"
+      traefik.http.routers.grafana.rule: "Host(`dash.lxft.dev`)"
+      traefik.http.routers.grafana.tls.certresolver: "le"
+      traefik.http.services.grafana.loadbalancer.server.port: "3000"
     env_file:
       - app.env
     volumes:

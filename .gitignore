@@ -12,6 +12,9 @@ presharedkey-*
 terraform.tfvars
 *.env
 config.json
+*_SECRET
+server/compose/auth/config/configuration.yml
+server/compose/auth/config/users_database.yml
 secrets.toml
 secrets.nix
 
@@ -21,6 +24,8 @@ google-pki-data
 !*.enc
 
 # binary files
+navidrome/data
+navidrome/music
 backups
 .DS_Store
 .idea
