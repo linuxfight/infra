@@ -55,9 +55,9 @@ resource "cloudflare_dns_record" "auth" {
   proxied = false
 }
 
-resource "cloudflare_dns_record" "music" {
+resource "cloudflare_dns_record" "fin" {
   zone_id = var.zone_id
-  name    = "music"
+  name    = "fin"
   content = "85.208.85.194"
   type    = "A"
   ttl = 3600
