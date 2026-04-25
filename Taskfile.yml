@@ -1,0 +1,41 @@
+version: "3"
+
+tasks:
+  sync:
+    silent: true
+    cmds:
+      - rsync -avz --delete --exclude "*.enc" server/. main@10.8.0.2:/home/main/config/
+      - rsync -avz --delete --exclude "*.enc" gateway/. main@cloud.lxft.dev:/home/main/config
+
+  encrypt:
+    silent: true
+    vars:
+      FILES_RAW:
+        sh: |
+          find . -type f \( \
+            -name "*.env" -o \
+            -name "*.conf" -o \
+            -name "secrets.nix" -o \
+            -name "secrets.toml" -o \
+            -name "publickey-*" -o \
+            -name "privatekey-*" -o \
+            -name "presharedkey-*" -o \
+            -name "config.json" -o \
+            -name "*.tfvars" -o \
+            -name "*_SECRET" -o \
+            -name "*.tfstate" -o \
+            -name "*.tfstate.backup" -o \
+            -name "configuration.yml" -o \
+            -name "users_database.yml" \
+          \) | grep -v backups | grep -v '\.enc$'
+    cmds:
+      - |
+        {{range $file := .FILES_RAW | splitLines}}
+        if [ ! -f "{{$file}}.enc" ] || [ "{{$file}}" -nt "{{$file}}.enc" ]; then
+          echo "Encrypting {{$file}} → {{$file}}.enc"
+          sops -e "{{$file}}" > "{{$file}}.enc"
+          git add "{{$file}}.enc"
+        else
+          echo "Skipping {{$file}} (already encrypted)"
+        fi
+        {{end}}
