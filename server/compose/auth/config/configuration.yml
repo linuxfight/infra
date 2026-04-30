@@ -1,0 +1,54 @@
+theme: "auto"
+
+log:
+  level: "info"
+
+server:
+  address: "tcp://0.0.0.0:9091"
+  endpoints:
+    authz:
+      forward-auth:
+        implementation: "ForwardAuth"
+
+session:
+  name: "authelia_session"
+  same_site: "lax"
+  inactivity: "5m"
+  expiration: "1h"
+  remember_me: "1M"
+  cookies:
+    - domain: "lxft.dev"
+      authelia_url: "https://auth.lxft.dev"
+      default_redirection_url: "https://lxft.dev"
+
+regulation:
+  max_retries: 3
+  find_time: "2m"
+  ban_time: "5m"
+
+storage:
+  postgres:
+    address: "tcp://authelia-db:5432"
+    database: "authelia"
+    username: "postgres"
+
+notifier:
+  disable_startup_check: true
+  smtp:
+    address: "smtp://smtp.maileroo.com:587"
+    username: "auth@lxft.dev"
+    sender: "Authelia <auth@lxft.dev>"
+    identifier: "localhost"
+    startup_check_address: "auth@lxft.dev"
+
+authentication_backend:
+  file:
+    path: "/config/users_database.yml"
+    password:
+      algorithm: "argon2id"
+
+access_control:
+  default_policy: "deny"
+  rules:
+    - domain: "auth.lxft.dev"
+      policy: "bypass"

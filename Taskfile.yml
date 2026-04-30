@@ -25,7 +25,6 @@ tasks:
             -name "*_SECRET" -o \
             -name "*.tfstate" -o \
             -name "*.tfstate.backup" -o \
-            -name "configuration.yml" -o \
             -name "users_database.yml" \
           \) | grep -v backups | grep -v '\.enc$'
     cmds:
