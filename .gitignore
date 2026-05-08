@@ -11,9 +11,11 @@ presharedkey-*
 # configs
 terraform.tfvars
 *.env
+authelia.pem
 config.json
 *_SECRET
 server/compose/auth/config/users_database.yml
+server/compose/auth/config/configuration.yml
 secrets.toml
 secrets.nix
 
@@ -23,8 +25,10 @@ google-pki-data
 !*.enc
 
 # binary files
-navidrome/data
-navidrome/music
+server/compose/navidrome/data/*
+!server/compose/navidrome/data/.gitkeep
+server/compose/navidrome/music/*
+!server/compose/navidrome/music/.gitkeep
 backups
 .DS_Store
 .idea

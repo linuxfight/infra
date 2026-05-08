@@ -1,0 +1,105 @@
+# yaml-language-server: $schema=https://www.authelia.com/schemas/latest/json-schema/configuration.json
+theme: auto
+log:
+    level: info
+identity_providers:
+    oidc:
+        hmac_secret: ENC[AES256_GCM,data:vNeiUALC09tHhUDSSq+TbFCqQ1Dn7bnBSvZnBt++RGIf2tYNIaPOQ18X/p6mZgt8lR8XiO1+Nvuxtdr+amYsjvAQYNulGE/YrHlwmm/BP+m4aPSXQTbavNBDxGeZCUaszQsTpBZkZE+jrFa/MyarQmJrbu9QRXeNA38QGNRLDsU=,iv:7QZgXaUEzm8qifX8Q47V2HAn0WCGTHvd/dzTg5HamsE=,tag:9TaVcIjImwlqpay5hiP6CQ==,type:str]
+        jwks:
+            - key_id: main
+              algorithm: RS256
+              use: sig
+              key: ENC[AES256_GCM,data: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,iv:NKN1jc3yQAtRhiokd2tI1jUoFyXGd5r5l3Ckuzoil5g=,tag:pjSRIQj5GFTa0Y72SKgdvA==,type:str]
+        clients:
+            - client_id: ENC[AES256_GCM,data:GIOcH3UnTfDcXsg8XQ9jgP9sg1AZazdaSHEbMtyzqJiPc0KGmXq/+fmHOQUjmsVSwiYXu6OTDxukSNwrjKhGQG092t6RPugF,iv:GFSORTYOtSIAmj2whjCL9kf15mVwoPoko2E7h7UIFus=,tag:DSwHze/pM1XkaqovbKoM3Q==,type:str]
+              client_name: Wakapi
+              client_secret: ENC[AES256_GCM,data:aVdKb8SahAWWUB8TOXcqufdOJow/zFvrEeuVJ1iazf3afGqAQUXS6dj2azYmGK5yh02zY2bcEAkulk7IjM1kiPi1S0XQhMzAyM9csL0tZ22DoqtKvWwbYW9rG1fpMI8scZVXr5TBOjJaA0b+kgtxNF9XfpCjvTeGbWSp6DO+tiR/cZA=,iv:SyjYJlvocyiX4EGYivSINFRc8/zBuzHEfhRbkf3gnrA=,tag:7wGdD1G2IigPZh7KsoNebQ==,type:str]
+              public: false
+              authorization_policy: one_factor
+              redirect_uris:
+                - https://waka.lxft.dev/oidc/authelia/callback
+              scopes:
+                - openid
+                - profile
+                - email
+              grant_types:
+                - authorization_code
+              response_types:
+                - code
+              token_endpoint_auth_method: client_secret_basic
+              userinfo_signed_response_alg: none
+server:
+    address: tcp://0.0.0.0:9091
+    endpoints:
+        authz:
+            forward-auth:
+                implementation: ForwardAuth
+session:
+    name: authelia_session
+    same_site: lax
+    inactivity: 5m
+    expiration: 1h
+    remember_me: 1M
+    cookies:
+        - domain: lxft.dev
+          authelia_url: https://auth.lxft.dev
+          default_redirection_url: https://lxft.dev
+regulation:
+    max_retries: 3
+    find_time: 2m
+    ban_time: 5m
+storage:
+    postgres:
+        address: tcp://authelia-db:5432
+        database: authelia
+        username: postgres
+notifier:
+    disable_startup_check: true
+    smtp:
+        address: smtp://smtp.maileroo.com:587
+        username: auth@lxft.dev
+        sender: Authelia <auth@lxft.dev>
+        identifier: localhost
+        startup_check_address: auth@lxft.dev
+authentication_backend:
+    file:
+        path: /config/users_database.yml
+        password:
+            algorithm: argon2
+access_control:
+    default_policy: deny
+    rules:
+        - domain: auth.lxft.dev
+          policy: bypass
+        - domain: music.lxft.dev
+          resources:
+            - ^/rest/.*
+            - ^/share/.*
+          policy: bypass
+        - domain: music.lxft.dev
+          subject:
+            - group:admins
+          policy: one_factor
+        - domain: waka.lxft.dev
+          resources:
+            - ^/api/.*
+          policy: bypass
+        - domain: waka.lxft.dev
+          subject:
+            - group:admins
+          policy: one_factor
+sops:
+    age:
+        - recipient: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBNeEtYcDhmbVY0cVJtNFll
+            UEkrSFpuYXE5VDZRUlBEZk4yeHkzRG0wbFVVCjZoa0F3L29FNFl1ZVJEckJlWHhP
+            SUFNZEw4RHVZeGdkN1JKUEROai83VXMKLS0tIGhTUXVkSDduOVBvcU1TMmMwWDQ5
+            a3ZiNi9kd0pGVm9MMHlTaFFmWU5aanMKPkIXyrLQ4RT3G4eCXtDsrGhzsERhT3UZ
+            ByPDWKXX66hYax5tpC1XstALr8KPlQAD9oo9t2YVMwVX7YUYoCVpRA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-05-08T15:22:37Z"
+    mac: ENC[AES256_GCM,data:O0XLJq4S2Qo5SW4uwb+Oup8oV/TgygRMph4qCxKDEJ8SDHNqoZdu0KDZRy8B5sc8vvSEQJU7e4z9avi4W3sEwM6eMn1MOIHN5q0UKmXBF83zdsqJhyqSCUa3dEzDpnPcg2fxA+0Omdyerp/i8d8H4hiLLx8AzkSe6wQKIQW5qiQ=,iv:s1R1Aqb10cbPqfOc/EgpGEjXcLQmEmlBMRMhrLfX9ss=,tag:BEFY0fUdK/aAE708nkzVdQ==,type:str]
+    encrypted_regex: ^(hmac_secret|client_id|client_secret|key)$
+    version: 3.12.1

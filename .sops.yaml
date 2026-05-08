@@ -23,12 +23,10 @@ creation_rules:
     encrypted_regex: >-
       ^(password|email)$
 
-  # - path_regex: configuration\.yml$
-  #   age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
-  #   encrypted_regex: >-
-  #     ^(password|passwd|secret|token|api_key|access_key|secret_key|
-  #     private_key|client_secret|passphrase|auth_token|signing_key|
-  #     encryption_key|jwt_secret|session_secret|webhook_secret|key)$
+  - path_regex: configuration\.yml$
+    age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
+    encrypted_regex: >-
+      ^(hmac_secret|client_id|client_secret|key)$
 
   #   - path_regex: \.ya?ml$
   #     age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
