@@ -11,7 +11,8 @@ presharedkey-*
 # configs
 terraform.tfvars
 *.env
-authelia.pem
+config.toml
+livekit.yml
 config.json
 *_SECRET
 server/compose/auth/config/users_database.yml

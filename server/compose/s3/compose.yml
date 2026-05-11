@@ -1,0 +1,28 @@
+networks:
+  infra:
+    external: true
+
+volumes:
+  garage-meta:
+  garage-data:
+
+services:
+  garage:
+    image: dxflrs/garage:v2.3.0
+    container_name: garage
+    restart: unless-stopped
+    networks:
+      - infra
+    volumes:
+      - ./config.toml:/etc/garage.toml:ro
+      - garage-meta:/var/lib/garage/meta
+      - garage-data:/var/lib/garage/data
+    environment:
+      GARAGE_CONFIG_FILE: /etc/garage.toml
+    command: /garage server --single-node
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.s3.entrypoints: "websecure"
+      traefik.http.routers.s3.rule: "Host(`s3.lxft.dev`)"
+      traefik.http.routers.s3.tls.certresolver: "le"
+      traefik.http.services.s3.loadbalancer.server.port: "3900"

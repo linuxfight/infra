@@ -23,6 +23,16 @@ creation_rules:
     encrypted_regex: >-
       ^(password|email)$
 
+  - path_regex: livekit\.yml$
+    age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
+    encrypted_regex: >-
+      ^(MRTCKEY)$
+
+  - path_regex: config\.toml$
+    age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
+    encrypted_regex: >-
+      ^(rpc_secret|admin_token|metrics_token|client_id|client_secret|key|secret|registration_token)$
+
   - path_regex: configuration\.yml$
     age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
     encrypted_regex: >-

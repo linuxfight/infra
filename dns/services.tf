@@ -1,33 +1,33 @@
-resource "cloudflare_dns_record" "cloud" {
+resource "cloudflare_dns_record" "vault" {
   zone_id = var.zone_id
-  name    = "cloud"
+  name    = "vault"
   content = "85.208.85.194"
   type    = "A"
   ttl = 3600
   proxied = false
 }
 
-resource "cloudflare_dns_record" "www" {
+resource "cloudflare_dns_record" "waka" {
   zone_id = var.zone_id
-  name    = "www"
-  content = "lxft.dev"
-  type    = "CNAME"
-  ttl = 3600
-  proxied = false
-}
-
-resource "cloudflare_dns_record" "auth" {
-  zone_id = var.zone_id
-  name    = "auth"
+  name    = "waka"
   content = "85.208.85.194"
   type    = "A"
   ttl = 3600
   proxied = false
 }
 
-resource "cloudflare_dns_record" "s3" {
+resource "cloudflare_dns_record" "music" {
   zone_id = var.zone_id
-  name    = "s3"
+  name    = "music"
+  content = "85.208.85.194"
+  type    = "A"
+  ttl = 3600
+  proxied = false
+}
+
+resource "cloudflare_dns_record" "feed" {
+  zone_id = var.zone_id
+  name    = "feed"
   content = "85.208.85.194"
   type    = "A"
   ttl = 3600

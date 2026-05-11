@@ -1,0 +1,71 @@
+volumes:
+  db:
+
+networks:
+  infra:
+    external: true
+
+services:
+  matrix-rtc-jwt:
+    image: ghcr.io/element-hq/lk-jwt-service:latest
+    container_name: matrix-rtc-jwt
+    networks:
+      - infra
+    env_file:
+      - app.env
+    restart: unless-stopped
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.matrixrtcjwt.entrypoints: "websecure"
+      traefik.http.routers.matrixrtcjwt.rule: "Host(`chat-rtc.lxft.dev`) && PathPrefix(`/sfu/get`) || PathPrefix(`/healthz`)"
+      traefik.http.services.matrixrtcjwt.loadbalancer.server.port: "8081"
+      traefik.http.routers.matrixrtcjwt.tls.certresolver: "le"
+
+  matrix-rtc-livekit:
+    image: livekit/livekit-server:latest
+    container_name: matrix-rtc-livekit
+    networks:
+      - infra
+    command: --config /etc/livekit.yaml
+    restart: unless-stopped
+    volumes:
+      - ./livekit.yml:/etc/livekit.yaml:ro
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.livekit.entrypoints: "websecure"
+      traefik.http.routers.livekit.rule: "Host(`chat-rtc.lxft.dev`)"
+      traefik.http.services.livekit.loadbalancer.server.port: "7880"
+      traefik.http.routers.livekit.tls.certresolver: "le"
+    ports:
+      - "7881:7881/tcp"
+      - "50100-50200:50100-50200/udp"
+
+  homeserver:
+    image: ghcr.io/matrix-construct/tuwunel:v1.6.2
+    restart: unless-stopped
+    volumes:
+      - db:/var/lib/tuwunel
+      - ./config.toml:/etc/config.toml
+    networks:
+      - infra
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.tuwunel.entrypoints: "websecure"
+      traefik.http.routers.tuwunel.rule: "Host(`chat.lxft.dev`)"
+      traefik.http.routers.tuwunel.tls.certresolver: "le"
+      traefik.http.services.tuwunel.loadbalancer.server.port: "6167"
+    environment:
+      TUWUNEL_SERVER_NAME: chat.lxft.dev
+      TUWUNEL_DATABASE_PATH: /var/lib/tuwunel
+      TUWUNEL_PORT: 6167
+      TUWUNEL_MAX_REQUEST_SIZE: 20000000
+      TUWUNEL_CONFIG: "/etc/config.toml"
+      TUWUNEL_WELL_KNOWN: |
+        {
+        client=https://chat.lxft.dev,
+        server=chat.lxft.dev:443
+        }
+    ulimits:
+      nofile:
+        soft: 1048567
+        hard: 1048567

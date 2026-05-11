@@ -32,9 +32,10 @@ services:
 
       # https
       - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.websecure.http3=true"
       - "--entrypoints.websecure.http.tls.certresolver=le"
       - "--certificatesresolvers.le.acme.email=hello@lxft.dev"
-      - "--certificatesresolvers.le.acme.storage=/le/acme.json" # Path inside container volume
+      - "--certificatesresolvers.le.acme.storage=/le/acme.json"
       - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
     ports:
       - "80:80"

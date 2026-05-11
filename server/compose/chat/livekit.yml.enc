@@ -1,0 +1,26 @@
+port: 7880
+bind_addresses:
+    - ""
+rtc:
+    tcp_port: 7881
+    port_range_start: 50100
+    port_range_end: 50200
+    use_external_ip: true
+    enable_loopback_candidate: false
+keys:
+    MRTCKEY: ENC[AES256_GCM,data:ZLgWc4KSS96YuJD8Z8dkdFw+dohR9wzI84mlclSp0r4=,iv:hpaAhEUcDD2lsGZjflRzowA+XNaTOWoKUwg6TTHZIJU=,tag:BrK9EiRaarZrY8FaagLPoA==,type:str]
+sops:
+    age:
+        - recipient: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBHc0Fzd1NWL2d3SHNlV2ox
+            WjBIWGt6cFFBSlhEQkhlTndtVkVjZjBJNDJnCkV6V2ZQei9ENVU2Smp0aUc1cHRs
+            dVRFc3puOGI5aDZRMkc2SW9nVTFldm8KLS0tIDBaTFhMWldIZktEcUpUeTdVM0RM
+            TU0zMjNpTmhtTkdiOWNSL0gxMnhIYVkKAgCbC05oB6IwlGkNI3Ua3E2PSq/NvPiT
+            OfZQxwZMleIdOw9fGvA8nO3IjEE9jHLG5qwTVAeBr3YYo6Y45n0j1A==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2026-05-10T17:39:17Z"
+    mac: ENC[AES256_GCM,data:Ii1t91h96h9ZwgUYYY39NwA0zEUWbDgpV4Per/kzkKWefZBDWTmoejmppjNMu8X+S7vq0PTxx4K7Ry8yjG8tPyK/trtdx4Dzfxd5XsNDSLRHJjMKwfMDgyv8Yx4TSffUkDStB6ytjqz40rdSXRaNyesvY+gCgiBfyHShIiMSg+M=,iv:codtii7HGox/zqk7IfLJr0yA8hV5uXna+AVFCS1VDgo=,tag:TQ2y3jTcOmpgWxwncCLcRQ==,type:str]
+    encrypted_regex: ^(MRTCKEY)$
+    version: 3.12.1
