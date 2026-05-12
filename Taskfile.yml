@@ -3,13 +3,20 @@
 version: "3"
 
 tasks:
-  dns:
+  cloud:
     silent: true
-    dir: dns
+    dir: cloud
     dotenv:
       - .env
     cmds:
       - tofu apply -auto-approve
+
+  cloud-plan:
+    dir: cloud
+    dotenv:
+      - .env
+    cmds:
+      - tofu plan
 
   sync:
     silent: true
