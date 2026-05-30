@@ -1,14 +1,20 @@
 users:
     linuxfight:
         displayname: Linuxfight
-        password: ENC[AES256_GCM,data:NFA848UwExw9qL41l7gkpW5mvrAp+uDRj9SHKbIY1v1rayCZW0RqVsN1kQG1njkYhpjZcuA4lCM0k0zSKQKPRF8ygEZb8aF3b6JHrfec3FUIv7d+pFthQFtX5nG7CV6V2w==,iv:54x0xZ/6gIxzd2oJJRea66wRyJqaOajhoixPYT/5xUQ=,tag:eUKmU4q55ofTOxugCo75hg==,type:str]
-        email: ENC[AES256_GCM,data:nXw3h7h1yX22ifscY7NAyvTmkw==,iv:gLcUc43gTokrOdzEi0xdtFSIDvRfPcCIWvC53oeK5nw=,tag:6hg5GvmrKfOg6QcDrOPMYw==,type:str]
+        password: ENC[AES256_GCM,data:VtFqlvYYNh4o19SI1hiNLZ4nlA1tpwmxOBRkLqXPVPymPBxxTH9iHMS2BDKJP3x0ZXGJarl2aFnbXUdJs0fns5fTLNoOrQSdDvIjfjXzcTlbovLDciWkKbTy1lSqCGRZBw==,iv:fCC0U7UWRPkhZgNVxBl5UaM6pdXMgIFyB2BJRohR+qg=,tag:YA27600jblyUgzCJbeKt9Q==,type:str]
+        email: ENC[AES256_GCM,data:fKF0+Yh207azh8stC5/XOmKjzw==,iv:iVfTRGkUEgQ76udcKnaCYhSM4KWSh/moQ3Qcloub9gM=,tag:xhGe4umvM5ih8hyctOga+g==,type:str]
         groups:
             - admins
     vovchik67:
         displayname: Vovchik67
-        password: ENC[AES256_GCM,data:UVYJJRpXSc1vmqMCiubiPNmq6fG8BEJupJGdWeL6NKK4tmrtkBw5UceQo/7VH/imhcpVWmd/tS6+51JPk1SHhiPbE+wb5rCGq5FvWM/H8FLmrbsCcB7YXfbXjkFqbhgefw==,iv:TSDMBElN+VtdwU7ON7GZny1O+XZUTqUX8x2nxH0VTzE=,tag:+2gFS+1yFp/QHVnfON3ySg==,type:str]
-        email: ENC[AES256_GCM,data:6RFqeIggcV04Tz+gou5RALo+M+vRxw==,iv:RidUdTM0zTVtGNu7jRtx0AmCBBLFBK6/1Ai1ekvriPY=,tag:lDJ1QskwJc+963AcqEqqmw==,type:str]
+        password: ENC[AES256_GCM,data:jHZOcmIi81dTpJzJd+DWZ1XaLmWvIXiRuXLlK6yJuKrfXbB0QCI9mixlkEuQeA49FNaWTWWBFqTxoEHJxeWx0JAKd2Nij8WL048CEGnoGyOXwBzyDZ5DhTaKCp3ahlePwQ==,iv:V+m3elbjLc5zD0iKRDh5ElF93p6Lygil+XX1rFDuEys=,tag:e9hZYZoqcBY/KbRt9fJ9wQ==,type:str]
+        email: ENC[AES256_GCM,data:pRPsHoqT9CXX+4ATWWbsKsPYBDkEUg==,iv:U21NEwoVcGly/K2oWJfehcnDAViC4UDooCBzLrctIfI=,tag:sxoQfZIPLDFraGhgOgTVTQ==,type:str]
+        groups:
+            - users
+    LH44:
+        displayname: LH44
+        password: ENC[AES256_GCM,data:gLOkUodExWDoxBOucolNsKNckk8O5zw3h1634KlMK50SSzOqJC14JtTjsyojoDpqwTSTPAOMGbEVbviP0juBOQWr+Z5yqM3FwnXWf1alhJ1YSXvhx0xYXft+WLevcSWAZw==,iv:DhF9q/ABbtdwkBE1/96+FGQPqCsliMVzwSEAQ8/J8DQ=,tag:oociH17hDecUmW8FbZ1xKQ==,type:str]
+        email: ENC[AES256_GCM,data:idr2fx7iFZo7eZb1Pd3qfEDLBTOVk2UiwfBlC1E=,iv:9Y8KUv+B43KqNwzNzDc4mTVc2HCRBNZRFhaI0dE08g8=,tag:dYIsVa+XBMmC+u2NzR3IYw==,type:str]
         groups:
             - users
 sops:
@@ -16,13 +22,13 @@ sops:
         - recipient: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBTUTJ3VERPT3hWelJpcjYy
-            RDRLSUc3T09mK3R4a21DblV4TnZWZ2xRTjBFCkRQV1hsczJZSW5sbGVEclZBZUcr
-            WGRyU2xZaTVxVmRlUlh3NTlJY1hTa1UKLS0tIFlUMDV4ZXhOYU9FNWdzbzRqUzdx
-            OCtZOUk4QVR5QnJVSDZCSDRac09sVzAK4GNet8QgGHV8GKT/Xij/bKnBngDPf7TN
-            3I6V23HR/Vs4QOYqGzY1L/iZ4fr/17Lp6Tc3Rqllc8caUrrP2yUDFg==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBBZ0QwYzVteUg1d2F1b3JN
+            VUhia0ZkU2pCUVdFdEo1eXV3cnRwNEdpOUJ3CjdyNE0ybTFDcFhtMWdNeXpyWmtB
+            emtiNFpobHVoYmkzS3ZRL0Z4WUlDd0kKLS0tIGw2TWpSalpBdVBpM09uTzczOWp4
+            SURDSWpWY3RjWmx4Nmt0eTRPT0NINmsKyZnqxrjT1GgzwixQDDiRawzd6v7vAl+j
+            7pcPF9twkiaCF7AaZZD7ZNnVNn4goFItSJ22z0ZV9aWLKt5aDSxk8A==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-05-10T17:44:53Z"
-    mac: ENC[AES256_GCM,data:iqR3wFDSfhypctCXK2mo58mAu7DpM0KSF7Q4bt8ma810P07CqggJXpK+hMfYdMAz6vn+BaGjTomq/DjGc5WiztKi/hr3vu8YEyUOB53P5q9RB2thpgtN95Yqw6mIkKNudeJN4276ee1Di8PL07Z46nwNYBv7lkr1ilIG3b2Y1Ug=,iv:vxgumFs8UFybDwQcvPlLdJfAJfudZuv1pjOGAOC+958=,tag:D1bjNiGQ5PVPWE5roHi3rA==,type:str]
+    lastmodified: "2026-05-30T17:21:58Z"
+    mac: ENC[AES256_GCM,data:q6ocQuRrZkk1zxiVEbkci1+6HLr/+3OkrJu4E03PVa1sEVi4LggSSOsqRo96nGxnOwUAfzuOnA3VymjaCE4+nZ+mQKa3CYmEazYR9PEwR+C/zZ/kFoCQDdXWfcVqbXzINys1NO6PAGl8rx+0L8jhUjqX2/SjLzx7vgWsXX6g9oA=,iv:F8VttDoAQ6i0mB8Wkd26ljZh4L4UuLJcNa+yNEKr4GA=,tag:BuLxxQMMk3URFV+/lTQ4+w==,type:str]
     encrypted_regex: ^(password|email)$
     version: 3.12.1

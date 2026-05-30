@@ -42,6 +42,7 @@ services:
 
   homeserver:
     image: ghcr.io/matrix-construct/tuwunel:v1.6.2
+    container_name: matrix-server
     restart: unless-stopped
     volumes:
       - db:/var/lib/tuwunel
