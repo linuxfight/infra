@@ -43,6 +43,7 @@ tasks:
             -name "*.tfstate" -o \
             -name "*.tfstate.backup" -o \
             -name "livekit.yml" -o \
+            -name "config.yaml" -o \
             -name "config.toml" -o \
             -name "configuration.yml" -o \
             -name "users_database.yml" \

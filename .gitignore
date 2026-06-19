@@ -9,6 +9,8 @@ publickey-*
 presharedkey-*
 
 # configs
+crowdsec
+config.yaml
 terraform.tfvars
 *.env
 config.toml

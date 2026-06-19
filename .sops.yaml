@@ -1,3 +1,6 @@
+ignores:
+  - path_regex: gateway/netbird/crowdsec/.*
+
 creation_rules:
   #   - path_regex: (\.(env|nix|conf|toml|tfstate|tfvars|json)$|tfstate\.backup$|.*_SECRET|configuration\.yml|users_database\.yml)
   #     age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
@@ -22,6 +25,11 @@ creation_rules:
     age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
     encrypted_regex: >-
       ^(password|email)$
+
+  - path_regex: config\.yaml$
+    age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
+    encrypted_regex: >-
+      ^(authSecret|encryptionKey)$
 
   - path_regex: livekit\.yml$
     age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
