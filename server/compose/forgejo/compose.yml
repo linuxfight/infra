@@ -22,7 +22,7 @@ services:
       - /etc/localtime:/etc/localtime:ro
     labels:
       traefik.enable: "true"
-      traefik.http.routers.forgejo.entrypoints: "websecure"
+      traefik.http.routers.forgejo.entrypoints: "https"
       traefik.http.routers.forgejo.rule: "Host(`lab.lxft.dev`)"
       traefik.http.routers.forgejo.tls.certresolver: "le"
       traefik.http.services.forgejo.loadbalancer.server.port: "3000"

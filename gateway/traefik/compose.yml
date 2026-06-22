@@ -4,6 +4,8 @@ volumes:
 networks:
   infra:
     external: true
+  netbird:
+    external: true
 
 services:
   traefik:
@@ -13,7 +15,9 @@ services:
     env_file:
       - .env
     networks:
-      - infra
+      infra:
+      netbird:
+        ipv4_address: 172.30.0.10
     security_opt:
       - no-new-privileges:true
     dns:
@@ -29,6 +33,17 @@ services:
       - "--providers.docker.network=infra"
       - "--providers.docker.exposedbydefault=false"
 
+      # turns
+      - "--entrypoints.turns.address=:5349"
+
+      # grpc
+      - "--entrypoints.https.transport.respondingTimeouts.readTimeout=0"
+      - "--entrypoints.https.transport.respondingTimeouts.writeTimeout=0"
+      - "--entrypoints.https.transport.respondingTimeouts.idleTimeout=0"
+      - "--serverstransport.forwardingtimeouts.responseheadertimeout=0s"
+      - "--serverstransport.forwardingtimeouts.idleconntimeout=0s"
+      - "--providers.file.filename=/etc/traefik/dynamic.yaml"
+
       # https
       - "--entrypoints.https.address=:443"
       - "--entrypoints.https.http3=true"
@@ -43,6 +58,13 @@ services:
     ports:
       - "443:443"
       - "443:443/udp"
+      - "5349:5349"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "500m"
+        max-file: "2"
     volumes:
       - traefik-le-data:/le
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./dynamic.yaml:/etc/traefik/dynamic.yaml:ro

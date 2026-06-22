@@ -9,7 +9,7 @@ server:
     healthcheckAddress: :9000
     logLevel: info
     logFile: console
-    authSecret: ENC[AES256_GCM,data:19WdUWtzzg8sb7ho4NB0kN7V5l/OX3Lj59E3jgZlNCiXfg8DhgIY8zV/DA==,iv:RA8XBShBhjikLuDLg+bvZqgR/RZq4fpY5U4kANErDrM=,tag:wN/vlRE9UmfWQnZxfSSYsw==,type:str]
+    authSecret: ENC[AES256_GCM,data:IR08OKVj3HWULZLHVyxFuveLdnCjyP7tIMKslm9xar6kGwPlcH5eWQC5Lw==,iv:Cwi7n1RrqxJklOLPpFHrsb/y7tcwxlMEEq29rgXTxCc=,tag:5Uj6h/6ylbrpXnqud6r7dQ==,type:str]
     dataDir: /var/lib/netbird
     auth:
         issuer: https://cloud.lxft.dev/oauth2
@@ -24,19 +24,19 @@ server:
             - 172.30.0.10/32
     store:
         engine: sqlite
-        encryptionKey: ENC[AES256_GCM,data:nA/3CRmMPuG7JIAtYslcV9gETSlOxfIaGBzNZFpiQBLX+BpIVy1vZx4YdWY=,iv:trvvzz11o2TBPtZe58BwSImZChCeX/67jXxtm2PO9S0=,tag:R175jqujyVSFXIV3WKKCvQ==,type:str]
+        encryptionKey: ENC[AES256_GCM,data:XuTHTIZyQBURpi2N5EEBRL+TaGmvmHOSa7Ca0Bnz17+rg6m8vtuvyD2WQsg=,iv:yg4QVtJBI1hk9X4M6r88RE4+fI/bKZ9bB9+YiFu6t60=,tag:x0rViUpkj7GFbRKjR6hcFA==,type:str]
 sops:
     age:
         - recipient: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSAydmk1VDVJUmNVRm50WStY
-            cDdySXRicGpPMmFSWGRuTlh4Ynd3aUFvamkwCmtqUUEvanFWK1NPR0plTTJMb1Z6
-            WllqcmFYVDFXSjNzZy9FSmNCbTBYdzgKLS0tIEdGeDlmL212V1l6ejlNMzRSMWNG
-            S1M4TVc1dHRLNC9aWmJkQjRKZlVaUDQKrZVWNFBtin2EWPXIDc3tnRq1RccKq3/C
-            SenQECsrCWYE6avJz79dqoOBoRQmyHV8EgarOasJAbmF9US2ICkKhA==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA2ZTVFdHRRK1NtZkdHYWFw
+            Wmp1dlRhQjBjNGdHQkcrZHdmQjNHdVkvc3lZCmR6MGphNDF2RXZVeEdjQU1tdU5M
+            SW10b3lrUFY4ZXQvYm9nQ2k5R0VSWk0KLS0tIHdDRGxrT1VqQ1NKTnp6V1R5b01j
+            Uit5dVFEK3p1ZFpCcTd2OThveHJhaXcKyz7VgRAyOfEmoIyyc2S0VtOMIPvrJTY8
+            qpITaWiLegIcRg/0s843jMV87wKzE8wDT2+y0YbeeMJ+sDOhOblCrA==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2026-06-19T22:29:58Z"
-    mac: ENC[AES256_GCM,data:CQQWiq4PV11ob/0UlvEEwhbbK3S7SuoEWkYYqc7vLspvqh5yl83lcqoftPHHa2TQTxFqd6+tTK2jHr6B1Ke19JHr//Cal5+5jKiil11FGRhi3fqCETRGWmDfSDicyKtlvOy0AlSwJTpVWhvEwC2H0aens4nb1AVKoUUhbUPoGE0=,iv:uWhqgNr46SILp+uhU7HR94UbggJSLxVtmfQgp9F2YH4=,tag:m9KFSiLsBgTNdHs6h5zVUQ==,type:str]
+    lastmodified: "2026-06-22T03:30:41Z"
+    mac: ENC[AES256_GCM,data:vHmpIAbIGBjBd1CpzjIgBj+3JjrkHLUZCJYtmCWcwNWWAduXYIqvOsPSmuMF/K5IvvNvacAOfyPeJbnpoexmanIx0MawEnnTKslhC2adbH1gFp3QPMtZCsjZ+dqcq4wGsWlHU57VDgUUzuxkZfiyGKU4aUI+UO2gthx3V+FncAk=,iv:yQ0aA8kAy6INkjEzwGv4FOHQuUTVrNmXCQPjEV4mSgs=,tag:4fxkDktGNbCwjn5zEnspFg==,type:str]
     encrypted_regex: ^(authSecret|encryptionKey)$
     version: 3.12.1

@@ -95,11 +95,9 @@ services:
     image: grafana/grafana:13.0.1
     container_name: grafana
     restart: unless-stopped
-    # ports:
-    #   - "3000:3000"
     labels:
       traefik.enable: "true"
-      traefik.http.routers.grafana.entrypoints: "websecure"
+      traefik.http.routers.grafana.entrypoints: "https"
       traefik.http.routers.grafana.rule: "Host(`dash.lxft.dev`)"
       traefik.http.routers.grafana.tls.certresolver: "le"
       traefik.http.services.grafana.loadbalancer.server.port: "3000"

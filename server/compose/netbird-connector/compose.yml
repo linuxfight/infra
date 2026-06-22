@@ -1,0 +1,14 @@
+volumes:
+  netbird-client:
+
+services:
+  netbird:
+    network_mode: host
+    restart: unless-stopped
+    container_name: netbird-connector
+    image: netbirdio/netbird:latest
+    env_file: .env
+    volumes:
+      - netbird-client:/var/lib/netbird
+    cap_add:
+      - NET_ADMIN

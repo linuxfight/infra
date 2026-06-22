@@ -1,0 +1,102 @@
+volumes:
+  netbird_data:
+  netbird_proxy_certs:
+
+networks:
+  infra:
+    external: true
+  netbird:
+    external: true
+
+services:
+  dashboard:
+    image: netbirdio/dashboard:latest
+    container_name: netbird-dashboard
+    restart: unless-stopped
+    networks:
+      - infra
+      - netbird
+    env_file:
+      - dashboard.env
+    labels:
+      traefik.enable: "true"
+      traefik.http.routers.netbird-dashboard.entrypoints: "https"
+      traefik.http.routers.netbird-dashboard.rule: "Host(`cloud.lxft.dev`)"
+      traefik.http.routers.netbird-dashboard.tls.certresolver: "le"
+      traefik.http.routers.netbird-dashboard.priority: 1
+      traefik.http.services.netbird-dashboard.loadbalancer.server.port: "80"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "500m"
+        max-file: "2"
+
+  netbird-server:
+    image: netbirdio/netbird-server:latest
+    container_name: netbird-server
+    restart: unless-stopped
+    networks:
+      - infra
+      - netbird
+    ports:
+      - "3478:3478/udp"
+    volumes:
+      - netbird_data:/var/lib/netbird
+      - ./config.yaml:/etc/netbird/config.yaml
+    command: ["--config", "/etc/netbird/config.yaml"]
+    labels:
+      traefik.enable: "true"
+
+      traefik.http.routers.netbird-grpc.entrypoints: "https"
+      traefik.http.routers.netbird-grpc.rule: "Host(`cloud.lxft.dev`) && (PathPrefix(`/signalexchange.SignalExchange/`) || PathPrefix(`/management.ManagementService/`) || PathPrefix(`/management.ProxyService/`))"
+      traefik.http.routers.netbird-grpc.tls.certresolver: "le"
+      traefik.http.routers.netbird-grpc.priority: 100
+      traefik.http.routers.netbird-grpc.service: "netbird-grpc"
+      traefik.http.services.netbird-grpc.loadbalancer.server.port: "80"
+      traefik.http.services.netbird-grpc.loadbalancer.server.scheme: "h2c"
+
+      traefik.http.routers.netbird-backend.rule: "Host(`cloud.lxft.dev`) && (PathPrefix(`/relay`) || PathPrefix(`/ws-proxy/`) || PathPrefix(`/api`) || PathPrefix(`/oauth2`))"
+      traefik.http.routers.netbird-backend.entrypoints: "https"
+      traefik.http.routers.netbird-backend.tls.certresolver: "le"
+      traefik.http.routers.netbird-backend.priority: 100
+      traefik.http.routers.netbird-backend.service: "netbird-backend"
+      traefik.http.services.netbird-backend.loadbalancer.server.port: "80"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "500m"
+        max-file: "2"
+
+  proxy:
+    image: netbirdio/reverse-proxy:latest
+    container_name: netbird-proxy
+    ports:
+      - 51820:51820/udp
+    restart: unless-stopped
+    networks:
+      - infra
+      - netbird
+    depends_on:
+      netbird-server:
+        condition: service_started
+      # crowdsec:
+      #   condition: service_healthy
+    env_file:
+      - proxy.env
+    volumes:
+      - netbird_proxy_certs:/certs
+    labels:
+      traefik.enable: "true"
+      traefik.tcp.routers.proxy-passthrough.entrypoints: "https"
+      traefik.tcp.routers.proxy-passthrough.rule: "HostSNI(`*`)"
+      traefik.tcp.routers.proxy-passthrough.tls.passthrough: "true"
+      traefik.tcp.routers.proxy-passthrough.priority: 1
+      traefik.tcp.routers.proxy-passthrough.service: "proxy-passthrough"
+      traefik.tcp.services.proxy-passthrough.loadbalancer.server.port: 443
+      # traefik.tcp.services.proxy-tls.loadbalancer.server.port: 8443
+      traefik.tcp.services.proxy-tls.loadbalancer.serverstransport: "pp-v2@file"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "500m"
+        max-file: "2"

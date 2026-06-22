@@ -25,24 +25,6 @@ resource "cloudflare_dns_record" "waka" {
   proxied = false
 }
 
-resource "cloudflare_dns_record" "music" {
-  zone_id = var.cloudflare_zone_id
-  name    = "music"
-  content = "85.208.85.194"
-  type    = "A"
-  ttl = 3600
-  proxied = false
-}
-
-resource "cloudflare_dns_record" "feed" {
-  zone_id = var.cloudflare_zone_id
-  name    = "feed"
-  content = "85.208.85.194"
-  type    = "A"
-  ttl = 3600
-  proxied = false
-}
-
 resource "cloudflare_dns_record" "chat" {
   zone_id = var.cloudflare_zone_id
   name    = "chat"
@@ -52,9 +34,18 @@ resource "cloudflare_dns_record" "chat" {
   proxied = false
 }
 
-resource "cloudflare_dns_record" "chat-rtc" {
+resource "cloudflare_dns_record" "livekit" {
   zone_id = var.cloudflare_zone_id
-  name    = "chat-rtc"
+  name    = "lk"
+  content = "85.208.85.194"
+  type    = "A"
+  ttl = 3600
+  proxied = false
+}
+
+resource "cloudflare_dns_record" "turn" {
+  zone_id = var.cloudflare_zone_id
+  name    = "turn"
   content = "85.208.85.194"
   type    = "A"
   ttl = 3600

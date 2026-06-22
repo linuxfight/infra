@@ -9,7 +9,6 @@ publickey-*
 presharedkey-*
 
 # configs
-crowdsec
 config.yaml
 terraform.tfvars
 *.env
@@ -35,4 +34,4 @@ server/compose/navidrome/music/*
 backups
 .DS_Store
 .idea
-.terraform
+providers

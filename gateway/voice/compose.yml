@@ -1,0 +1,32 @@
+networks:
+  infra:
+    external: true
+
+services:
+  livekit:
+    image: livekit/livekit-server:v1.12.0
+    restart: unless-stopped
+    container_name: livekit
+    command: --config /etc/livekit.yaml
+    environment:
+      LIVEKIT_KEYS: "${LIVEKIT_API_KEY:?set LIVEKIT_API_KEY in .env}: ${LIVEKIT_API_SECRET:?set LIVEKIT_API_SECRET in .env}"
+    networks:
+      - infra
+    volumes:
+      - ./livekit.yaml:/etc/livekit.yaml:ro
+    ports:
+      - "3479:3479/udp"
+      - "7881:7881/tcp"
+      - "7882:7882/udp"
+    labels:
+      traefik.enable: "true"
+
+      traefik.http.routers.livekit.entrypoints: "https"
+      traefik.http.routers.livekit.rule: "Host(`lk.lxft.dev`)"
+      traefik.http.routers.livekit.tls.certresolver: "le"
+      traefik.http.services.livekit.loadbalancer.server.port: "7880"
+
+      traefik.tcp.routers.livekit-turns.entrypoints: "turns"
+      traefik.tcp.routers.livekit-turns.rule: "HostSNI(`turn.lxft.dev`)"
+      traefik.tcp.routers.livekit-turns.tls.certresolver: "le"
+      traefik.tcp.services.livekit-turns.loadbalancer.server.port: "5349"

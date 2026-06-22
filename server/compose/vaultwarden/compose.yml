@@ -21,7 +21,7 @@ services:
       - vw-data:/data
     labels:
       traefik.enable: "true"
-      traefik.http.routers.vaultwarden.entrypoints: "websecure"
+      traefik.http.routers.vaultwarden.entrypoints: "https"
       traefik.http.routers.vaultwarden.rule: "Host(`vault.lxft.dev`)"
       traefik.http.routers.vaultwarden.tls.certresolver: "le"
       traefik.http.services.vaultwarden.loadbalancer.server.port: "80"
