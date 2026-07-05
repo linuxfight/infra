@@ -1,3 +1,3 @@
 #!/bin/zsh
 
-docker network create infra
+docker network create infra || true

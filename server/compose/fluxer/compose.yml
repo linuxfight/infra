@@ -181,7 +181,7 @@ services:
     labels:
       traefik.enable: "true"
       traefik.http.routers.fluxer-api.entrypoints: "https"
-      traefik.http.routers.fluxer-api.rule: "Host(`chat.lxft.dev`) && PathPrefix(`/api`)"
+      traefik.http.routers.fluxer-api.rule: "Host(`chat.lxft.dev`) && (PathPrefix(`/api`) || Path(`/.well-known/fluxer`))"
       traefik.http.routers.fluxer-api.tls.certresolver: "le"
       traefik.http.routers.fluxer-api.middlewares: "fluxer-api-strip"
       traefik.http.middlewares.fluxer-api-strip.stripprefix.prefixes: "/api"
