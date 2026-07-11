@@ -22,15 +22,11 @@
   ];
 
   virtualisation.docker.enable = true;
-  boot.kernel.sysctl."vm.overcommit_memory" = "1";
   services.openssh.enable = true;
   networking.hostName = "blackbox";
   networking.networkmanager.enable = true;
-  networking.wg-quick.interfaces.wg0 = {
-    configFile = "/home/main/config/wg/server.conf";
-    autostart = true;
-  };
-  networking.firewall.trustedInterfaces = [ "wg0" ];
 
+  nixpkgs.config.allowUnfree = true;
+  hardware.enableRedistributableFirmware = true;
   system.stateVersion = "25.11";
 }

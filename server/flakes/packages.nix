@@ -10,5 +10,8 @@
     neofetch
     tree
     btop
+    ffmpeg-full
+    intel-gpu-tools
+    nvtopPackages.intel
   ];
 }
