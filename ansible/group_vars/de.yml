@@ -1,0 +1,3 @@
+apt_mirror_url: "https://ftp.uni-stuttgart.de/ubuntu/"
+reboot_hour: "2"
+reboot_minute: "30"

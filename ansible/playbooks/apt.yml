@@ -1,0 +1,67 @@
+- name: Set up apt mirror, update and packages
+  hosts: de:ru
+  become: true
+  vars:
+    packages_to_install:
+      - curl
+      - git
+      - htop
+      - btop
+      - tmux
+      - vim
+      - neovim
+      - zsh
+      - iperf3
+
+  tasks:
+    - name: Fail if no mirror URL defined for this host's group
+      ansible.builtin.fail:
+        msg: "No apt_mirror_url defined for host {{ inventory_hostname }} (groups: {{ group_names }})"
+      when: apt_mirror_url is not defined
+
+    - name: Check if ubuntu.sources (DEB822 format) exists
+      ansible.builtin.stat:
+        path: /etc/apt/sources.list.d/ubuntu.sources
+      register: deb822_sources
+
+    - name: Replace mirror URLs in ubuntu.sources
+      ansible.builtin.replace:
+        path: /etc/apt/sources.list.d/ubuntu.sources
+        regexp: 'https?://([a-zA-Z0-9-]+\.)?archive\.ubuntu\.com/ubuntu/?|https?://security\.ubuntu\.com/ubuntu/?'
+        replace: "{{ apt_mirror_url }}"
+      when: deb822_sources.stat.exists
+
+    - name: Replace mirror URLs in sources.list
+      ansible.builtin.replace:
+        path: /etc/apt/sources.list
+        regexp: 'https?://([a-zA-Z0-9-]+\.)?archive\.ubuntu\.com/ubuntu/?|https?://security\.ubuntu\.com/ubuntu/?'
+        replace: "{{ apt_mirror_url }}"
+      when: not deb822_sources.stat.exists
+
+    - name: Update APT cache after replacing mirrors
+      ansible.builtin.apt:
+        update_cache: true
+
+    - name: Schedule weekly APT automatic updates
+      ansible.builtin.cron:
+        name: "Weekly automatic APT updates"
+        minute: "{{ reboot_minute }}"
+        hour: "{{ reboot_hour }}"
+        weekday: "0"
+        job: "apt-get update && apt-get upgrade -y && apt-get autoremove -y && apt-get clean"
+        state: present
+
+    - name: Schedule weekly system reboot (GMT)
+      ansible.builtin.cron:
+        name: "Weekly system reboot"
+        minute: "{{ reboot_minute }}"
+        hour: "{{ reboot_hour }}"
+        weekday: "0"
+        job: "/sbin/shutdown -r now"
+        state: present
+
+    - name: Ensure specified packages are installed
+      ansible.builtin.apt:
+        name: "{{ packages_to_install }}"
+        state: present
+        update_cache: true

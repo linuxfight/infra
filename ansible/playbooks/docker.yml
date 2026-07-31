@@ -1,0 +1,21 @@
+- name: Setup Docker
+  hosts: secure
+  become: true
+
+  tasks:
+    - name: Install Docker
+      include_role:
+        name: geerlingguy.docker
+      vars:
+        docker_users:
+          - main
+        docker_daemon_options:
+          firewall-backend: nftables
+
+    - name: Enable IPv4 forwarding for Docker
+      ansible.builtin.sysctl:
+        name: net.ipv4.ip_forward
+        value: '1'
+        sysctl_set: true
+        state: present
+        reload: true

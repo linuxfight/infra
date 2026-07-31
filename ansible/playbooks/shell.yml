@@ -1,0 +1,82 @@
+- name: Install and configure Zsh, Oh My Zsh, Starship, and plugins
+  hosts: secure
+  become: true
+  vars:
+    target_user: "main"
+    target_user_home: "/home/{{ target_user }}"
+
+  tasks:
+    - name: Install prerequisite packages (zsh, git, curl)
+      ansible.builtin.apt:
+        name:
+          - zsh
+          - git
+          - curl
+          - procps
+        state: present
+        update_cache: true
+
+    - name: Check if Oh My Zsh is already installed
+      ansible.builtin.stat:
+        path: "{{ target_user_home }}/.oh-my-zsh"
+      register: oh_my_zsh_stat
+
+    - name: Download Oh My Zsh installer
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+        dest: /tmp/install_ohmyzsh.sh
+        mode: '0755'
+      when: not oh_my_zsh_stat.stat.exists
+
+    - name: Install Oh My Zsh for target user
+      ansible.builtin.command: /tmp/install_ohmyzsh.sh --unattended
+      become: true
+      become_user: "{{ target_user }}"
+      when: not oh_my_zsh_stat.stat.exists
+
+    - name: Install zsh-autosuggestions plugin
+      ansible.builtin.git:
+        repo: https://github.com/zsh-users/zsh-autosuggestions
+        dest: "{{ target_user_home }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+        depth: 1
+      become: true
+      become_user: "{{ target_user }}"
+
+    - name: Install zsh-syntax-highlighting plugin
+      ansible.builtin.git:
+        repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+        dest: "{{ target_user_home }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+        depth: 1
+      become: true
+      become_user: "{{ target_user }}"
+
+    - name: Install or update Starship prompt
+      ansible.builtin.shell:
+        cmd: curl -fsSL https://starship.rs/install.sh | sh -s -- --yes
+        creates: /usr/local/bin/starship
+
+    - name: Ensure custom .zshrc configuration is set
+      ansible.builtin.blockinfile:
+        path: "{{ target_user_home }}/.zshrc"
+        create: true
+        owner: "{{ target_user }}"
+        group: "{{ target_user }}"
+        mode: '0644'
+        marker: "# {mark} ANSIBLE MANAGED ZSH CONFIG"
+        block: |
+          export ZSH="$HOME/.oh-my-zsh"
+          ZSH_THEME=""
+
+          plugins=(
+              git
+              zsh-autosuggestions
+              zsh-syntax-highlighting
+          )
+
+          source $ZSH/oh-my-zsh.sh
+          eval "$(starship init zsh)"
+
+    - name: Change default shell to Zsh for target user
+      ansible.builtin.user:
+        name: "{{ target_user }}"
+        shell: /bin/zsh

@@ -21,8 +21,10 @@ tasks:
   sync:
     silent: true
     cmds:
-      - rsync -avz --delete --exclude "*.enc" server/. main@192.168.1.152:/home/main/config/
+      # - rsync -avz --delete --exclude "*.enc" server/. main@192.168.1.152:/home/main/config/
       - rsync -avz --delete --exclude "*.enc" gateway/. main@cloud.lxft.dev:/home/main/config
+      - rsync -avz --delete --exclude "*.enc" proxy/. main@ru1.lxft.dev:/home/main/config
+      - rsync -avz --delete --exclude "*.enc" proxy/. main@de1.lxft.dev:/home/main/config
 
   encrypt:
     silent: true
@@ -46,7 +48,8 @@ tasks:
             -name "config.yaml" -o \
             -name "config.toml" -o \
             -name "configuration.yml" -o \
-            -name "users_database.yml" \
+            -name "users_database.yml" -o \
+            -name "all.yml" \
           \) | grep -v backups | grep -v '\.enc$'
     cmds:
       - |

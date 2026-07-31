@@ -26,6 +26,11 @@ creation_rules:
     encrypted_regex: >-
       ^(password|email)$
 
+  - path_regex: all\.yml$
+    age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
+    encrypted_regex: >-
+      ^(main_user_password|root_user_password|main_public_key)$
+
   - path_regex: config\.yaml$
     age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
     encrypted_regex: >-

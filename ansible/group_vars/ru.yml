@@ -1,0 +1,3 @@
+apt_mirror_url: "https://mirror.yandex.ru/ubuntu/"
+reboot_hour: "5"
+reboot_minute: "30"

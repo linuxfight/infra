@@ -1,0 +1,29 @@
+- name: Setup SSH
+  hosts: insecure
+  become: true
+
+  collections:
+    - devsec.hardening
+
+  tasks:
+    - name: Create user 'main'
+      user:
+        name: main
+        password: "{{ main_user_password | password_hash('sha512') }}"
+        shell: /bin/bash
+
+    - name: Grant sudo rights to 'main'
+      lineinfile:
+        path: /etc/sudoers
+        line: "main ALL=(ALL) NOPASSWD:ALL"
+        validate: 'visudo -cf %s'
+
+    - name: Add public key to 'main'
+      authorized_key:
+        user: main
+        state: present
+        key: "{{ main_public_key }}"
+
+    - name: Apply SSH hardening from dev-sec collection
+      include_role:
+        name: devsec.hardening.ssh_hardening
