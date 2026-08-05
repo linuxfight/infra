@@ -1,0 +1,17 @@
+networks:
+  infra:
+    external: true
+
+services:
+  nginx:
+    image: ghcr.io/linuxfight/website:1.0.0
+    restart: unless-stopped
+    networks:
+      - infra
+    labels:
+      traefik.enable: "true"
+
+      traefik.http.routers.website.entrypoints: "https"
+      traefik.http.routers.website.rule: "Host(`lxft.dev`)"
+      traefik.http.routers.website.tls.certresolver: "le"
+      traefik.http.services.website.loadbalancer.server.port: "80"

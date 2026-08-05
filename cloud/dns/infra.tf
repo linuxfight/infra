@@ -34,6 +34,15 @@ resource "cloudflare_dns_record" "www" {
   proxied = false
 }
 
+resource "cloudflare_dns_record" "root" {
+  zone_id = var.cloudflare_zone_id
+  name    = "@"
+  content = "ru1"
+  type    = "CNAME"
+  ttl = 3600
+  proxied = false
+}
+
 resource "cloudflare_dns_record" "proxy" {
   zone_id = var.cloudflare_zone_id
   name    = "*.cloud.lxft.dev"
