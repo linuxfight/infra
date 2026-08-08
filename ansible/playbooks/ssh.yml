@@ -1,6 +1,8 @@
 - name: Setup SSH
   hosts: insecure
   become: true
+  vars:
+    ssh_allow_tcp_forwarding: "yes"
 
   collections:
     - devsec.hardening

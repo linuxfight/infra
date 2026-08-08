@@ -1,0 +1,22 @@
+all:
+  children:
+    k3s_cluster:
+      children:
+        server:
+          hosts:
+            staging-01:
+              ansible_host: cloud.lxft.dev   # or private IP if you have one
+        agent:
+          hosts: {}   # empty for now — add worker1/worker2 here later
+      vars:
+        ansible_user: main
+        k3s_version: v1.31.2+k3s1
+        token: "{{ vault_k3s_token }}"
+        cluster_context: staging
+        api_endpoint: cloud.lxft.dev
+        kubeconfig: "{{ playbook_dir }}/../fetched/staging-kubeconfig.yaml"
+        extra_server_args: >-
+          --tls-san 127.0.0.1
+          --tls-san staging-01.internal
+          --disable traefik
+          --disable servicelb

@@ -49,7 +49,7 @@ tasks:
             -name "config.toml" -o \
             -name "configuration.yml" -o \
             -name "users_database.yml" -o \
-            -name "all.yml" \
+            -name "vault.yml" \
           \) | grep -v backups | grep -v '\.enc$'
     cmds:
       - |

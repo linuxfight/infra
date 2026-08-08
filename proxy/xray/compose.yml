@@ -23,4 +23,5 @@ services:
     volumes:
       - "./config.json:/etc/xray/config.json:ro"
     ports:
+      - "5224:5224"
       - "8443:8443"

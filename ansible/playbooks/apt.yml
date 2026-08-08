@@ -1,17 +1,6 @@
 - name: Set up apt mirror, update and packages
   hosts: de:ru
   become: true
-  vars:
-    packages_to_install:
-      - curl
-      - git
-      - htop
-      - btop
-      - tmux
-      - vim
-      - neovim
-      - zsh
-      - iperf3
 
   tasks:
     - name: Fail if no mirror URL defined for this host's group

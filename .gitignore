@@ -20,7 +20,7 @@ server/compose/auth/config/users_database.yml
 server/compose/auth/config/configuration.yml
 secrets.toml
 secrets.nix
-all.yml
+vault.yml
 *.pem
 *.key
 

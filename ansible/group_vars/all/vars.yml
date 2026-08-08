@@ -1,0 +1,11 @@
+main_public_key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMy/PHGvHbfB7dSbw8NX48pTtK1yX4KWlukGMLgdDeFE artemiirodkevich@Artemiis-MacBook-Air.local"
+packages_to_install:
+  - curl
+  - git
+  - htop
+  - btop
+  - tmux
+  - vim
+  - neovim
+  - zsh
+  - iperf3
