@@ -2,8 +2,8 @@
 
 ## TODO:
 - add terraform CD
-- add gateway CD
-- add homelab CD
+- add ansible CD
+- add secrets for different clusters
 
 ## Git Pre-commit hook
 ```shell

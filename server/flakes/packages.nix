@@ -12,6 +12,8 @@
     btop
     ffmpeg-full
     intel-gpu-tools
+    tmux
+    python314
     nvtopPackages.intel
   ];
 }
