@@ -11,7 +11,7 @@ creation_rules:
   - path_regex: \.json$
     age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
     encrypted_regex: >-
-      ^(address|id|serverName|password|shortId|target|serverNames|shortIds|privateKey)$
+      ^(address|id|serverName|password|shortId|target|serverNames|shortIds|privateKey|secretKey|publicKey)$
 
   - path_regex: (\.tfstate$|tfstate\.backup$)
     age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
