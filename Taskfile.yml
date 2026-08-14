@@ -3,7 +3,7 @@
 version: "3"
 
 tasks:
-  cloud:
+  cloud:apply:
     silent: true
     dir: cloud
     dotenv:
@@ -11,7 +11,7 @@ tasks:
     cmds:
       - tofu apply -auto-approve
 
-  cloud-plan:
+  cloud:plan:
     dir: cloud
     dotenv:
       - .env
