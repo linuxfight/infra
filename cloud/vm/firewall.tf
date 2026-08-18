@@ -70,3 +70,24 @@ resource "twc_firewall_rule" "allow_8443_v6" {
   port      = "8443"
   cidr      = "::/0"
 }
+
+// WireGuard (51820)
+resource "twc_firewall_rule" "allow_wireguard_v4" {
+  firewall_id = twc_firewall.default_deny.id
+  description = "Allow WireGuard (IPv4)"
+
+  direction = "ingress"
+  protocol  = "udp"
+  port      = "51820"
+  cidr      = "0.0.0.0/0"
+}
+
+resource "twc_firewall_rule" "allow_wireguard_v6" {
+  firewall_id = twc_firewall.default_deny.id
+  description = "Allow WireGuard (IPv6)"
+
+  direction = "ingress"
+  protocol  = "udp6"
+  port      = "51820"
+  cidr      = "::/0"
+}
