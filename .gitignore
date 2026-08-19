@@ -38,3 +38,4 @@ backups
 .DS_Store
 .idea
 providers
+server/compose/mc/data/*
