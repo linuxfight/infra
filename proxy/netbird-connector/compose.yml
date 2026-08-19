@@ -1,0 +1,27 @@
+volumes:
+  netbird-client:
+  netbird-certs:
+
+services:
+  reverse-proxy:
+    image: netbirdio/reverse-proxy:latest
+    container_name: netbird-proxy
+    restart: unless-stopped
+    ports:
+      - "25565:25565"
+    env_file: .env
+    volumes:
+      - netbird-certs:/certs
+
+  netbird:
+    image: netbirdio/netbird:latest
+    container_name: netbird-connector
+    restart: unless-stopped
+    network_mode: host
+    env_file: .env
+    volumes:
+      - netbird-client:/var/lib/netbird
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+      - SYS_RESOURCE
