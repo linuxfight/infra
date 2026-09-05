@@ -13,5 +13,11 @@ variable "cloudflare_account_id" {
 variable "cloudflare_domain" {
   description = "Domain name"
   type        = string
-  default     = "example.com"
+  default     = "lxft.dev"
+}
+
+variable "admin_email" {
+  description = "Private email for admin@lxft.dev"
+  type = string
+  sensitive = true
 }
