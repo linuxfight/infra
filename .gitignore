@@ -2,40 +2,20 @@
 *.tfstate
 *.tfstate.backup
 
-# wireguard
-*.conf
-privatekey-*
-publickey-*
-presharedkey-*
-
 # configs
-config.yaml
-terraform.tfvars
 *.env
-config.toml
-livekit.yml
 config.json
-*_SECRET
-server/compose/auth/config/users_database.yml
-server/compose/auth/config/configuration.yml
-secrets.toml
 secrets.nix
-vault.yml
-*.pem
-*.key
+secrets.yml
 
 # encryption
 *.agekey
 google-pki-data
 !*.enc
 
+
 # binary files
-server/compose/navidrome/data/*
-!server/compose/navidrome/data/.gitkeep
-server/compose/navidrome/music/*
-!server/compose/navidrome/music/.gitkeep
 backups
 .DS_Store
 .idea
 providers
-server/compose/mc/data/*

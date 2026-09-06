@@ -3,6 +3,12 @@
 version: "3"
 
 tasks:
+  ansible:apply:
+    silent: true
+    dir: ansible
+    cmds:
+      - ansible-playbook -i inventory/servers.ini playbooks/setup.yml
+
   cloud:apply:
     silent: true
     dir: cloud
@@ -18,46 +24,45 @@ tasks:
     cmds:
       - tofu plan
 
-  sync:
-    silent: true
-    cmds:
-      - rsync -avz --delete --exclude "*.enc" server/. main@192.168.1.152:/home/main/config/
-      - rsync -avz --delete --exclude "*.enc" proxy/. main@ru1.lxft.dev:/home/main/config
-      - rsync -avz --delete --exclude "*.enc" proxy/. main@de1.lxft.dev:/home/main/config
-
   encrypt:
     silent: true
     vars:
+      HASH_MANIFEST: '.sops-hashes.json'
       FILES_RAW:
         sh: |
-          find . -type f \( \
+          find . -type f \
+            \( \
             -name "*.env" -o \
-            -name "*.conf" -o \
             -name "secrets.nix" -o \
-            -name "secrets.toml" -o \
-            -name "publickey-*" -o \
-            -name "privatekey-*" -o \
-            -name "presharedkey-*" -o \
+            -name "secrets.yml" -o \
             -name "config.json" -o \
-            -name "*.tfvars" -o \
-            -name "*_SECRET" -o \
             -name "*.tfstate" -o \
-            -name "*.tfstate.backup" -o \
-            -name "livekit.yml" -o \
-            -name "config.yaml" -o \
-            -name "config.toml" -o \
-            -name "configuration.yml" -o \
-            -name "users_database.yml" -o \
-            -name "vault.yml" \
-          \) | grep -v backups | grep -v '\.enc$'
+            -name "*.tfstate.backup" \
+            \) | grep -v backups | grep -v '\.enc$'
     cmds:
       - |
-        {{range $file := .FILES_RAW | splitLines}}
-        if [ ! -f "{{$file}}.enc" ] || [ "{{$file}}" -nt "{{$file}}.enc" ]; then
-          echo "Encrypting {{$file}} → {{$file}}.enc"
-          sops -e "{{$file}}" > "{{$file}}.enc"
-          git add "{{$file}}.enc"
-        else
-          echo "Skipping {{$file}} (already encrypted)"
-        fi
-        {{end}}
+        MANIFEST="{{.HASH_MANIFEST}}"
+        [ -f "$MANIFEST" ] || echo '{}' > "$MANIFEST"
+
+        changed=0
+
+        echo "{{.FILES_RAW}}" | while IFS= read -r file; do
+          [ -z "$file" ] && continue
+
+          current_hash=$(sha256sum "$file" | awk '{print $1}')
+          stored_hash=$(jq -r --arg f "$file" '.[$f] // empty' "$MANIFEST")
+
+          if [ -f "${file}.enc" ] && [ "$current_hash" = "$stored_hash" ]; then
+            echo "Skipping ${file} (unchanged)"
+            continue
+          fi
+
+          echo "Encrypting ${file} → ${file}.enc"
+          sops -e "$file" > "${file}.enc"
+          git add "${file}.enc"
+
+          tmp=$(mktemp)
+          jq --arg f "$file" --arg h "$current_hash" '.[$f] = $h' "$MANIFEST" > "$tmp" && mv "$tmp" "$MANIFEST"
+        done
+
+        git add "$MANIFEST"

@@ -1,9 +1,6 @@
-ignores:
-  - path_regex: gateway/netbird/crowdsec/.*
-
 creation_rules:
-  #   - path_regex: (\.(env|nix|conf|toml|tfstate|tfvars|json)$|tfstate\.backup$|.*_SECRET|configuration\.yml|users_database\.yml)
-  #     age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
+  - path_regex: secrets\.yml$
+    age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
 
   - path_regex: \.env$
     age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
@@ -16,57 +13,5 @@ creation_rules:
   - path_regex: (\.tfstate$|tfstate\.backup$)
     age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
 
-  - path_regex: \.tfvars$
-    age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
-    encrypted_regex: >-
-      ^(zone_id|account_id|domain)$
-
-  - path_regex: users_database\.yml$
-    age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
-    encrypted_regex: >-
-      ^(password|email)$
-
-  - path_regex: vault\.yml$
-    age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
-    encrypted_regex: >-
-      ^(main_user_password|root_user_password|vault_k3s_token)$
-
-  - path_regex: config\.yaml$
-    age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
-    encrypted_regex: >-
-      ^(authSecret|encryptionKey)$
-
-  - path_regex: livekit\.yml$
-    age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
-    encrypted_regex: >-
-      ^(MRTCKEY)$
-
-  - path_regex: config\.toml$
-    age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
-    encrypted_regex: >-
-      ^(rpc_secret|admin_token|metrics_token|client_id|client_secret|key|secret|registration_token)$
-
-  - path_regex: configuration\.yml$
-    age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
-    encrypted_regex: >-
-      ^(hmac_secret|client_id|client_secret|key)$
-
-  #   - path_regex: \.ya?ml$
-  #     age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
-  #     encrypted_regex: >-
-  #       ^(password|passwd|secret|token|api_key|apikey|access_key|secret_key|
-  #       private_key|client_secret|passphrase|auth_token|signing_key|
-  #       encryption_key|master_key|jwt_secret|session_secret|webhook_secret|
-  #       service_account_key|credentials|private|connection_string|key)$
-
-  - path_regex: (publickey|privatekey|presharedkey)-.*
-    age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
-
-  - path_regex: .*_SECRET$
-    age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
-
   - path_regex: \.nix$
-    age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
-
-  - path_regex: \.conf$
     age: age13vz3u6zjv44a4ak4r2qmdaydh4s0l4yfhywhsvzzhg9p5rn004pqsy8gx3
