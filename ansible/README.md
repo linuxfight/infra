@@ -1,4 +1,4 @@
 # TODO
 
-- firewall
-- timeweb mirror https
+- firewall (on a machine)
+- set up kubesolo

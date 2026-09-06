@@ -9,3 +9,6 @@ packages_to_install:
   - neovim
   - zsh
   - iperf3
+  - curl
+  - procps
+ssh_allow_tcp_forwarding: "yes"
