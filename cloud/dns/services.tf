@@ -15,3 +15,12 @@ resource "cloudflare_dns_record" "www" {
   ttl = 3600
   proxied = false
 }
+
+resource "cloudflare_dns_record" "forgejo" {
+  zone_id = var.cloudflare_zone_id
+  name    = "git"
+  content = "cloud.lxft.dev"
+  type    = "CNAME"
+  ttl = 3600
+  proxied = false
+}
