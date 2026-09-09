@@ -1,21 +1,17 @@
 # terraform
+.terraform
 *.tfstate
-*.tfstate.backup
+*.tfstate.*
 
-# configs
+# secrets
+!*.enc
 *.env
-config.json
+*.agekey
 secrets.nix
 secrets.yml
-
-# encryption
-*.agekey
 google-pki-data
-!*.enc
-
 
 # binary files
 backups
 .DS_Store
 .idea
-providers

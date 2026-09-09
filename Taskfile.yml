@@ -34,10 +34,7 @@ tasks:
             \( \
             -name "*.env" -o \
             -name "secrets.nix" -o \
-            -name "secrets.yml" -o \
-            -name "config.json" -o \
-            -name "*.tfstate" -o \
-            -name "*.tfstate.backup" \
+            -name "secrets.yml" \
             \) | grep -v backups | grep -v '\.enc$'
     cmds:
       - |
