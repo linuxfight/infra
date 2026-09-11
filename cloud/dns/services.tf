@@ -1,7 +1,7 @@
 resource "cloudflare_dns_record" "root" {
   zone_id = var.cloudflare_zone_id
   name    = "@"
-  content = "ru1.lxft.dev"
+  content = "cloud.lxft.dev"
   type    = "CNAME"
   ttl = 3600
   proxied = false
